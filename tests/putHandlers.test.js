@@ -8,12 +8,26 @@ const requestBody = {
     }
   ]
 };
+const requestBodyPost= 
+    {
+		"name": "string",
+		"cardId": 1
+	  }
 
-// First Test: Check Response Status Code
-test('status code 200 for request body', async () => {
+
+test('should return status code 200 for request body', async () => {
   let actualStatus;
   try {
-    const response = await fetch(`${config.API_URL}/api/v1/kits/3`, {
+    const responsePost = await fetch(`${config.API_URL}/api/v1/kits`, {
+			method: 'POST',
+			headers: {
+			'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(requestBodyPost)
+		});
+		const postBody = await responsePost.json();
+        const kitID = postBody.id;
+    const response = await fetch(`${config.API_URL}/api/v1/kits/${kitID}`, { 
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -27,11 +41,20 @@ test('status code 200 for request body', async () => {
   expect(actualStatus).toBe(200);
 });
 
-// Second Test: Check Response Body
-test('expect response body to be "ok": true', async () => {
+
+test('should expect response body to be "ok": true', async () => {
   let actualResponse;
   try {
-    const response = await fetch(`${config.API_URL}/api/v1/kits/3`, {
+    const responsePost = await fetch(`${config.API_URL}/api/v1/kits`, {
+			method: 'POST',
+			headers: {
+			'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(requestBodyPost)
+		});
+		const postBody = await responsePost.json();
+        const kitID = postBody.id;
+    const response = await fetch(`${config.API_URL}/api/v1/kits/${kitID}`, { 
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-undef
+
 const config = require('../config');
 
 const requestBody = 
@@ -24,7 +24,7 @@ test('should return 201 created', async () => {
 	}
 	expect (actualStatus).toBe (201);
 });
-test('shoudl return name = string', async () => {
+test('should return name = string', async () => {
 	let actualBody
     try {
 		const response = await fetch(`${config.API_URL}/api/v1/kits`, {
